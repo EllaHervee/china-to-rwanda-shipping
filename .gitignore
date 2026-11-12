@@ -1,0 +1,11 @@
+﻿node_modules/
+.next/
+/frontend/out/
+/backend/.env
+/frontend/.env*
+/backend/.env*
+!.env.example
+!frontend/.env.example
+.npm-cache/
+neon-serverless-*.tgz
+npm-debug.log*

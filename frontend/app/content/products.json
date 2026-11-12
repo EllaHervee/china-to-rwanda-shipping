@@ -1,0 +1,1 @@
+"<section id=\"products\">\n        <div class=\"wrap\">\n          <h2>Products we ship</h2>\n          <p class=\"sub\">\n            Popular goods our customers import from China. Ask us about anything\n            not listed.\n          </p>\n          <div class=\"grid\" id=\"plist\"></div>\n        </div>\n      </section>"

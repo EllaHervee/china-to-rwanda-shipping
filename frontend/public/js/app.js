@@ -90,14 +90,14 @@
 
   function bookingText() {
     const value = (id) => byId(id).value.trim();
-    if (!value("bn") || !value("bp") || !value("bx")) {
-      byId("bout").textContent = "Please fill in your name, phone and a description of your goods.";
+    if (!value("bn") || !value("bp") || !value("bx") || !value("bpay")) {
+      byId("bout").textContent = "Please fill in your name, phone, payment method and a description of your goods.";
       return null;
     }
     byId("bout").textContent = "Thank you! Your booking message is ready to send.";
     return [
       "New shipment booking", `Name: ${value("bn")}`, `Phone: ${value("bp")}`,
-      `Email: ${value("be") || "-"}`, `Product type: ${value("bt")}`,
+      `Email: ${value("be") || "-"}`, `Payment method: ${value("bpay")}`, `Product type: ${value("bt")}`,
       `Weight: ${value("bw") || "-"} kg`, `Method: ${value("bm")}`,
       `From (China): ${value("bs") || "-"}`, `To (Rwanda): ${value("bd") || "-"}`,
       `Details: ${value("bx")}`,

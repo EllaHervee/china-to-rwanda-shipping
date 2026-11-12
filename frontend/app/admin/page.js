@@ -3,6 +3,7 @@ import SiteShell from "../site-shell";
 import { getAuthenticatedUser } from "../lib/authenticated-user";
 import { isAdminUser } from "../lib/admin";
 import ProductsManager from "./products-manager";
+import PaymentsManager from "./payments-manager";
 
 export default async function AdminPage() {
   let user;
@@ -20,6 +21,7 @@ export default async function AdminPage() {
           <h1>Manage products</h1>
           <p className="sub">Add or remove products shown in the public catalog.</p>
           <ProductsManager />
+          <PaymentsManager />
         </div>
       </section>
     </SiteShell>

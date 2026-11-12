@@ -20,8 +20,9 @@ npm install
 Copy `frontend/.env.example` to `frontend/.env.local`, then set the Supabase
 project URL and publishable key, Neon connection string (`DATABASE_URL`),
 Supabase service-role key, and a long random `CRON_SECRET`. Keep `DATABASE_URL`,
-`SUPABASE_SERVICE_ROLE_KEY`, and `CRON_SECRET` server-side; never expose them with
-a `NEXT_PUBLIC_` prefix.
+`SUPABASE_SERVICE_ROLE_KEY`, `CRON_SECRET`, `FLW_SECRET_KEY`, and `FLW_SECRET_HASH`
+server-side; never expose them with a `NEXT_PUBLIC_` prefix. Flutterwave test keys
+can be used while configuring the checkout.
 
 Email signup is available at `/signup`, with an optional phone number field.
 Google signup and login are also available on the auth page; enable the
@@ -32,6 +33,9 @@ Run `neon/migrations/001_shipments_notifications.sql` in the Neon SQL Editor. It
 creates and seeds the public product catalog, shipment and notification tables,
 admin allow-list, and account deletion queue. In Supabase Auth URL Configuration,
 allow `http://localhost:3000/**` for signup confirmation and password recovery.
+Also run `neon/migrations/002_payment_requests.sql`. In Flutterwave, finish merchant
+verification, enable RWF card/mobile-money payments, and set the webhook URL to
+`https://YOUR-DOMAIN/api/payment-webhook` with the same secret hash as `FLW_SECRET_HASH`.
 Restart the frontend after changing env values.
 
 After creating and confirming your own account, add its Supabase user ID as the
@@ -48,6 +52,12 @@ account deletion under `/settings`; they can cancel during the 30-day grace
 period. `vercel.json` schedules the deletion worker daily. If you host elsewhere,
 configure that host to send a daily `GET /api/cron/process-account-deletions`
 request with `Authorization: Bearer <CRON_SECRET>`.
+
+After confirming a shipment quote, an admin can create a fixed-price RWF payment
+request from `/admin` and send the generated `/pay/<id>` link to the customer.
+Customers check out on Flutterwave; the return handler verifies the transaction
+server-side before marking the request paid. Payment processing requires valid
+Flutterwave account keys and the Neon payment migration.
 
 Shipment notifications are generated when an operator changes `status` on a row
 in `public.shipments`. Create each shipment with the customer's Supabase user ID,

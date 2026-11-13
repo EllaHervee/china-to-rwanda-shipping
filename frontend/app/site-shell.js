@@ -1,46 +1,50 @@
 import Script from "next/script";
 import NotificationBell from "./account/notification-bell";
 import { LanguageControl } from "./language-control";
+import SiteSearch from "./site-search";
 
 function SiteHeader() {
   return (
     <header>
       <div className="wrap">
-        <a className="brand" href="/" aria-label="CHI-RWA Cargo home">
-          <span className="brand-mark">
-            <svg width="44" height="36" viewBox="160 40 360 210" aria-hidden="true">
-              <circle cx="330" cy="125" r="72" fill="#f59e0b" />
-              <path d="M170 202C175 90 280 45 470 55C310 80 240 125 225 202Z" fill="#1e2a78" />
-              <rect x="225" y="166" width="34" height="24" fill="#de2910" />
-              <rect x="261" y="166" width="34" height="24" fill="#fad201" />
-              <rect x="297" y="166" width="34" height="24" fill="#00a1de" />
-              <rect x="261" y="142" width="34" height="24" fill="#20603d" />
-              <rect x="400" y="140" width="50" height="50" fill="#1e2a78" />
-              <path d="M190 190H505Q485 224 452 237H225Z" fill="#1e2a78" />
-            </svg>
-          </span>
-          <span>CHI-RWA CARGO</span>
-        </a>
+        <div className="header-top">
+          <a className="brand" href="/" aria-label="CHI-RWA Cargo home">
+            <span className="brand-mark">
+              <svg width="44" height="36" viewBox="160 40 360 210" aria-hidden="true">
+                <circle cx="330" cy="125" r="72" fill="#f59e0b" />
+                <path d="M170 202C175 90 280 45 470 55C310 80 240 125 225 202Z" fill="#1e2a78" />
+                <rect x="225" y="166" width="34" height="24" fill="#de2910" />
+                <rect x="261" y="166" width="34" height="24" fill="#fad201" />
+                <rect x="297" y="166" width="34" height="24" fill="#00a1de" />
+                <rect x="261" y="142" width="34" height="24" fill="#20603d" />
+                <rect x="400" y="140" width="50" height="50" fill="#1e2a78" />
+                <path d="M190 190H505Q485 224 452 237H225Z" fill="#1e2a78" />
+              </svg>
+            </span>
+            <span>CHI-RWA CARGO</span>
+          </a>
+          <div className="header-tools">
+            <SiteSearch />
+            <div className="sw">
+              <LanguageControl />
+              <select id="cur" aria-label="Currency">
+                <option value="USD">$ USD</option>
+                <option value="RWF">RWF</option>
+                <option value="CNY">? CNY</option>
+              </select>
+            </div>
+            <NotificationBell />
+            <a className="account-link" href="/login">Log in</a>
+            <a className="signup-link" href="/signup">Sign up</a>
+          </div>
+        </div>
         <nav aria-label="Main navigation">
           <a href="/">Home</a>
           <a className="hide" href="/how-it-works">How it works</a>
           <a className="hide" href="/products">Products</a>
           <a href="/quote">Get a quote</a>
           <a href="/book">Book</a>
-          <div className="nav-locale">
-            <a href="/contact">Contact</a>
-            <div className="sw">
-              <LanguageControl />
-              <select id="cur" aria-label="Currency">
-                <option value="USD">$ USD</option>
-                <option value="RWF">RWF</option>
-                <option value="CNY">¥ CNY</option>
-              </select>
-            </div>
-          </div>
-          <NotificationBell />
-          <a href="/login">Log in</a>
-          <a className="signup-link" href="/signup">Sign up</a>
+          <a href="/contact">Contact</a>
         </nav>
       </div>
     </header>
